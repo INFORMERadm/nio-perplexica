@@ -2,6 +2,9 @@ FROM nikolaik/python-nodejs:python3.12-nodejs20-bullseye
 
 ARG SEARXNG_API_URL
 
+# Install build dependencies
+RUN apt-get update && apt-get install -y build-essential python3
+
 WORKDIR /home/perplexica
 
 COPY src /home/perplexica/src
