@@ -56,7 +56,7 @@ export const handleConnection = async (
         configuration: {
           baseURL: searchParams.get('openAIBaseURL'),
         },
-      });
+      }) as BaseChatModel;
     }
 
     if (
