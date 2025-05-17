@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.12-nodejs20-bullseye
+FROM nikolaik/python-nodejs:python3.12-nodejs20.19.1-bullseye
 
 ARG SEARXNG_API_URL
 
@@ -18,7 +18,11 @@ RUN sed -i "s|SEARXNG = \".*\"|SEARXNG = \"${SEARXNG_API_URL}\"|g" /home/perplex
 
 RUN mkdir /home/perplexica/data
 
-RUN yarn install
+# Clean install and rebuild better-sqlite3
+RUN yarn cache clean && \
+    yarn install --force && \
+    yarn rebuild better-sqlite3
+
 RUN yarn build
 
 CMD ["yarn", "start"]
